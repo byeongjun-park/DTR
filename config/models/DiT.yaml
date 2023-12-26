@@ -1,0 +1,9 @@
+# @package _group_
+name: "DiT-L/2"
+param:
+  num_classes: ${data.num_classes}
+  latent_size: null # To be filled in running code.
+routing:
+  sharing_ratio: 0.8 # following MaTL's observation.
+  taskcount: 1000 # Default: num time steps.
+  init_method: "DTR"
