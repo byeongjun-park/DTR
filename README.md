@@ -10,19 +10,30 @@ To gain a better understanding of MTL perspective in diffusion modes, please vis
 
 
 <!-- Please Insert generated Images. -->
-![DTR](assets/DTR.png)
+<img src="assets/DTR.png" width="50%" alt="DTR">
 
 **DTR** creates different pathways for each denoising task (step).
 
-1. **Simple yet Effective** (Performance gain is significant!)
-2. **Boosts convergence speed**
-3. **No additional parameters**
-4. **Plug-and-Play** (Easily integrates into any diffusion architecture)
-5. **Minimal Code** (Implemented with just 10+ lines of code)
+**DTR** is:
 
-![golden_retriever](assets/golden_retriever.png)
+💡 **Simple yet Effective** (Performance gain is significant!)
 
-Generated sample (*golden retriever*) of 256x256 DiT-L/2 + DTR (w/ cfg=2.0).
+💡 **Boosts convergence speed**
+
+💡 **No additional parameters**
+
+💡 **Plug-and-Play** (Easily integrates into any diffusion architecture)
+
+💡 **Minimal Code** (Implemented with just 10+ lines of code)
+
+----------------
+
+![Golden Retriever](assets/golden_retriever.png)
+
+Generated sample (*golden retriever*) from **256x256 DiT-L/2 + DTR (w/ cfg=2.0)**.
+
+----------------
+
 
 ## Updates
 
