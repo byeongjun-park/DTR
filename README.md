@@ -4,12 +4,25 @@
 
 <!-- <a href="https://gohyojun15.github.io/ANT_diffusion/"><img src="https://img.shields.io/badge/Project%20Page-online-brightgreen"></a> -->
 
-<!-- Please Insert generated Images. -->
-
-
 This repository contains the official pytorch implementation of the paper: "Denoising Task Routing for Diffusion Models".
 In this repository, we release codes for the improved version of [DiT](https://openaccess.thecvf.com/content/ICCV2023/papers/Peebles_Scalable_Diffusion_Models_with_Transformers_ICCV_2023_paper.pdf) with the task routing. 
 To gain a better understanding of MTL perspective in diffusion modes, please visit the project page of [ANT](https://gohyojun15.github.io/ANT_diffusion/). 
+
+
+<!-- Please Insert generated Images. -->
+![DTR](assets/DTR.png)
+
+**DTR** creates different pathways for each denoising task (step).
+
+1. **Simple yet Effective** (Performance gain is significant!)
+2. **Boosts convergence speed**
+3. **No additional parameters**
+4. **Plug-and-Play** (Easily integrates into any diffusion architecture)
+5. **Minimal Code** (Implemented with just 10+ lines of code)
+
+![golden_retriever](assets/golden_retriever.png)
+
+Generated sample (*golden retriever*) of 256x256 DiT-L/2 + DTR (w/ cfg=2.0).
 
 ## Updates
 
@@ -19,7 +32,6 @@ To gain a better understanding of MTL perspective in diffusion modes, please vis
 - [ ] Project Pages
 
 [//]: # (- [ ] Linking Addressing Negative Transfer Project Pages.)
-
 [//]: # (- [ ] Generated Images.)
 [//]: # (- [ ] Loss weighting check.)
 [//]: # (- [ ] Code Cleaning.)
