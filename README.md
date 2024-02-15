@@ -37,6 +37,7 @@ Generated sample (*golden retriever*) from **256x256 DiT-L/2 + DTR (w/ cfg=2.0)*
 
 ## Updates
 
+ * **2024.02.16**: Upload Project Page.
  * **2023.12.26**: Initial Release.
 
 ## Todo
