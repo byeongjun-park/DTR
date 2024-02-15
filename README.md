@@ -1,6 +1,7 @@
 # Denoising Task Routing for Diffusion Models
 <!-- Arxiv Link, Project Link -->
 <a href="https://arxiv.org/abs/2310.07138"><img src="https://img.shields.io/badge/arXiv-2310.07138-b31b1b.svg"></a>
+<a href="https://openreview.net/forum?id=MY0qlcFcUg"><img src="https://img.shields.io/badge/OpenReview-ICLR2024-orange"></a>
 <a href="https://byeongjun-park.github.io/DTR/"><img src="https://img.shields.io/badge/Project%20Page-online-brightgreen"></a>
 
 This repository contains the official pytorch implementation of the paper: "Denoising Task Routing for Diffusion Models".
