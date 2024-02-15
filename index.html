@@ -105,6 +105,7 @@
                   <span>Code</span>
                 </a>
               </span>
+            
             </div>
           </div>
         </div>
@@ -123,10 +124,13 @@
         Through rethinking the training of diffusion models as multi-task learning,
         we propose a simple add-on strategy, DTR, 
         that improves diffusion model architectures by explicitly routing denoising tasks in diffusion models.
+        
       </h4>
     </div>
   </div>
 </section>
+
+
 
 
 <section class="section"  style="background-color:#efeff081">
@@ -148,6 +152,11 @@
               <strong>(3) Accelerated Convergence</strong>, <strong>(4) No extra parameters and significant computational</strong>.
             </li>
           </ul>
+          <img id="teaser1" src="static/images/DTR_teaser1.PNG" alt="teaser1">
+          <img id="teaser2" src="static/images/DTR_teaser2.PNG" alt="teaser2">
+          <figcaption style="text-align: center;">
+            <strong>Figure:</strong> Qualtative results on DTR attached on DiT trained on ImageNet.
+          </figcaption>
         </div>
       </div>
     </div>
@@ -219,27 +228,41 @@
               </li>
           </ul>
         <h3 class="title is-5">B. Routing Mask</h2>
-          <p>
-            The mask \(m_{D_t}\) is created as:
+
+          <div class="flex-container2">
+            <!-- Image Container -->
+            <div class="image-container2">
+            <figure>
+              <img id="taskaffinity" src="static/images/Routing_mask.PNG" alt="Task Affinity Diagram">
+              <figcaption style="text-align: center;">
+                <strong>Figure:</strong> Routing mask according to various \(\alpha \).
+            </figure>
+          </div>   
+          <!-- Text Container -->
+          <div class="text-container2">
             <p>
-              \[ m_{D_t, c} = \begin{cases} 
-              1, & \text{if } \lfloor(C - C_\beta) \cdot \left(\frac{t-1}{T}\right)^{\alpha}\rceil < c \leq \lfloor(C - C_\beta) \cdot \left(\frac{t}{T}\right)^{\alpha}\rceil + C_\beta,\\ 
-              0, & \text{otherwise.} 
-              \end{cases} \]
+              The mask \(m_{D_t}\) is created as:
+              <p>
+                \[ m_{D_t, c} = \begin{cases} 
+                1, & \text{if } \lfloor(C - C_\beta) \cdot \left(\frac{t-1}{T}\right)^{\alpha}\rceil < c \leq \lfloor(C - C_\beta) \cdot \left(\frac{t}{T}\right)^{\alpha}\rceil + C_\beta,\\ 
+                0, & \text{otherwise.} 
+                \end{cases} \]
+              </p>
+              <ul>
+                <li> 
+                  \(C_\beta\): activated number of channels for each task, which is represented as \(\beta \cdot C\). \((0<\beta< 1) \).
+                </li>
+                <li> 
+                  <strong>Task Affinity</strong>: In above equation, activated channels are shifted as sliding window, enforcing denoising tasks at adjacent timesteps to have more shared channels.
+                </li>
+                <li> 
+                  <strong>Task Weight</strong>: By introducing hyperparameter \(\alpha > 1\), shifting of sliding window less occurs for lower timesteps,
+                  allwoing  more task-dedicated channels to higher timesteps.
+                </li>
+            </ul>
             </p>
-            <ul>
-              <li> 
-                \(C_\beta\): activated number of channels for each task, which is represented as \(\beta \cdot C\). \((0<\beta< 1) \).
-              </li>
-              <li> 
-                <strong>Task Affinity</strong>: In above equation, activated channels are shifted as sliding window, enforcing denoising tasks at adjacent timesteps to have more shared channels.
-              </li>
-              <li> 
-                <strong>Task Weight</strong>: By introducing hyperparameter \(\alpha > 1\), shifting of sliding window less occurs for lower timesteps,
-                allwoing  more task-dedicated channels to higher timesteps.
-              </li>
-          </ul>
-          </p>
+          </div>
+        </div>
       </div>
   </div>
 </section>

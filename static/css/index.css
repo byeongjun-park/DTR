@@ -207,6 +207,52 @@ img {
   }
 }
 
+
+
+
+.flex-container2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start; /* Aligns items to the top */
+}
+
+.text-container2 {
+  flex: 1; /* Allows the container to grow */
+  padding: 15px; /* Adjust padding as needed */
+  max-width: 70%; /* Takes up half the width of the container */
+}
+
+.image-container2 {
+  flex: 1; /* Allows the container to grow */
+  max-width: 30%; /* Takes up half the width of the container */
+  text-align: center; /* Centers the image if it is smaller than its container */
+}
+
+img2 {
+  max-width: 100%; /* Ensures the image is responsive and does not overflow its container */
+  height: auto; /* Maintains aspect ratio */
+}
+
+/* Responsive styles - applies when the screen width is 768px or less */
+@media (max-width: 768px) {
+  .flex-container2 {
+    flex-direction: column; /* Stacks flex items vertically */
+  }
+
+  .text-container2,
+  .image-container2 {
+    max-width: 100%; /* Each container takes full width */
+    margin-bottom: 15px; /* Adds space between the stacked items */
+  }
+
+  img2 {
+    max-width: 100%; /* Image can take full width of its container */
+  }
+}
+
+
+
 figure {
   margin: 0; /* Removes the default margin */
 }
