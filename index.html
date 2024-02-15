@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Simple add-on strategy improves diffusion model architectures by explicitly routing denoising tasks in diffusion models.">
+  <meta name="keywords" content="Diffusion Model Architecture, Multi-Task Learning (MTL), Diffusion Models">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DTR: Denoising Task Routing for Diffusion Models</title>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PGB6W6BMP8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PGB6W6BMP8');
+</script>
+  <!-- End Google Tag Manager -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+  </script>
+</head>
+<body>
+  
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Denoising Task Routing for Diffusion Models</h1>
+
+
+            <!-- <div class="is-size-4 paper accepted">
+              <strong>Accepted to NeurIPS 2023</strong>
+            </div>
+            <br>  -->
+
+            <!-- Author name -->
+            <div class="is-size-4 publication-authors">
+              <span class="author-block" style="color: #0606e8;">
+                Byeongjun Park<sup>*</sup>,</span>
+              <span class="author-block" style="color:#0606e8;">
+                Sangmin Woo<sup>*</sup>,</span>
+              <span class="author-block" style="color:hwb(332 0% 17%);">
+                Hyojun Go<sup>*</sup>,</span>
+              </span>
+              <span class="author-block"  style="color:hwb(332 0% 17%);">
+                Jinyoung Kim<sup>*</sup>,</span>
+              </span>
+              <span class="author-block"  style="color:#0606e8;">
+                Changick Kim<sup>&#8224;</sup></span>
+              </span>
+            </div>
+            <br>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><b style="color:#0606e8; font-weight:normal">&#x25B6 </b> Korea Advanced Institute of Science and Technology (KAIST)</b></span>
+              <span class="author-block">&nbsp&nbsp <b style="color:hwb(332 0% 17%); font-weight:normal">&#x25B6 </b> Twelvelabs</span>
+              <br>
+              <span class="author-block">&nbsp&nbsp<sup>*</sup>Equal contribution</span>
+              <span class="author-block">&nbsp&nbsp<sup>&#8224;</sup>Corresponding Author</span>
+            </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2310.07138"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2310.07138"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/byeongjun-park/DTR"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h4 class="subtitle has-text-centered">
+        Through rethinking the training of diffusion models as multi-task learning,
+        we propose a simple add-on strategy, DTR, 
+        that improves diffusion model architectures by explicitly routing denoising tasks in diffusion models.
+      </h4>
+    </div>
+  </div>
+</section>
+
+
+<section class="section"  style="background-color:#efeff081">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2">Summary</h2>
+        <div class="content has-text-justified">
+          <ul>
+            <li>Our work is first to explore the architectural improvements for diffusion models through the lens of multi-task learning.</li>
+            <li>
+              We propose a simple add-on strategy, Denoising Task Routing <strong>(DTR)</strong>, that explicitly routes denoising tasks by establishing distinct information pathways for each denoising task.
+            </li>
+            <li>
+              We show that incorporating the prior knowledge of the denoising tasks such as task affinity and task wegihts in <strong>DTR</strong> can dramatically improve performance of diffusion models.
+            </li>
+            <li>
+              DTR offers notable advantages: <strong>(1) Simple Implementation</strong>, <strong>(2) Improved Performance</strong>, 
+              <strong>(3) Accelerated Convergence</strong>, <strong>(4) No extra parameters and significant computational</strong>.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="column is-full-width">
+  <div class="container is-max-desktop">
+  <div class="container is-max-desktop">
+    <h2 class="title is-2">Method: DTR</h2>
+    <div class="content">
+        <h2 class="title is-4"> 1. Conceptualizing diffusion models as a form of multi-task learning.</h2>
+        <p>
+          Denoising tasks at each timestep \(t\), represented as \(D_t\), are central to diffusion models.
+           These tasks focus on reducing noise, which is quantified by the loss function 
+           \(L_t = ||\epsilon - \epsilon_\theta(x_t, t)||_2^2\).
+          In this context, diffusion models are conceptualized as a multi-task learning problem, 
+          where they address a set of denoising tasks \(\{D_t\}_{t=1,...,T}\).
+        </p>
+      </div>
+    </div>
+    <br>
+      <!-- Task Affinity -->
+      <div class="content">
+        <h2 class="title is-4">2. Task routing for diffusion models</h2>
+        <div class="flex-container">
+            <!-- Image Container -->
+            <div class="image-container">
+            <figure>
+              <img id="taskaffinity" src="static/images/DTR.PNG" alt="Task Affinity Diagram">
+              <figcaption style="text-align: center;">
+                <strong>Figure:</strong> Task routing for diffusion models.
+            </figure>
+          </div>   
+          <!-- Text Container -->
+          <div class="text-container">
+            <p>
+              Task routing establish task-specific paths for each 
+              denoising task within a single neural network \(\epsilon_\theta\) by
+              utilizing channel masking. For given \(l\)-th block's input \(z^l\),
+              our denoising task routing is represented as follows:
+              \[z^{l+1} = z^l + Block (m_{D_t} \odot z^l ) \]
+              where \(m_{D_t} \in \{0, 1\}^C \) denotes task-specific channel binary mask for \(D_t \).
+            </p>
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <div class="content">
+        <h2 class="title is-4">3. Mask Creation of Denoising Task Routing (DTR)</h2>
+        <h3 class="title is-5">A. Design principles</h2>
+            <p>
+              DTR utilizes the specific characteristics of denoising tasks for task routing.
+              From recent findings, design of masks incorporates <strong>(1) Task Affinity</strong> and <strong>(2) Task Weights.</strong>
+            </p>
+            <ul>
+              <li> 
+                <strong>Task Affinity</strong>: 
+                Denoising tasks at adjacent timesteps have a higher task affinity than those distant timesteps. 
+                To incorporate this, DTR enforces denoising tasks at adjacent timesteps to have more shared channels than those distant timesteps.
+              </li>
+              <li> 
+                <strong>Task Weight</strong>: 
+                Previous loss weighting methods have shown that assinging higher weights to denoising tasks at higher timesteps can improve diffusion models.
+                DTR incorporates this by assigning more channels to denoising tasks at higher timesteps.
+              </li>
+          </ul>
+        <h3 class="title is-5">B. Routing Mask</h2>
+          <p>
+            The mask \(m_{D_t}\) is created as:
+            <p>
+              \[ m_{D_t, c} = \begin{cases} 
+              1, & \text{if } \lfloor(C - C_\beta) \cdot \left(\frac{t-1}{T}\right)^{\alpha}\rceil < c \leq \lfloor(C - C_\beta) \cdot \left(\frac{t}{T}\right)^{\alpha}\rceil + C_\beta,\\ 
+              0, & \text{otherwise.} 
+              \end{cases} \]
+            </p>
+            <ul>
+              <li> 
+                \(C_\beta\): activated number of channels for each task, which is represented as \(\beta \cdot C\). \((0<\beta< 1) \).
+              </li>
+              <li> 
+                <strong>Task Affinity</strong>: In above equation, activated channels are shifted as sliding window, enforcing denoising tasks at adjacent timesteps to have more shared channels.
+              </li>
+              <li> 
+                <strong>Task Weight</strong>: By introducing hyperparameter \(\alpha > 1\), shifting of sliding window less occurs for lower timesteps,
+                allwoing  more task-dedicated channels to higher timesteps.
+              </li>
+          </ul>
+          </p>
+      </div>
+  </div>
+</section>
+  
+<section class="section" style="background-color:#efeff081">
+  <div class="column is-full-width">
+    <div class="container is-max-desktop">
+    <div class="container is-max-desktop">
+      <h2 class="title is-2">Experimental Results</h2>
+
+      <h2 class="title is-4"> 1. Improved quality of generated images</h2>
+      <p>
+        DTR improves the quality of generated images.
+      </p>
+      <br> </br>
+      <img id="taskaffinity" src="static/images/DTR_comparative_results.PNG">
+      <figcaption style="text-align: center;">
+        <strong>Figure:</strong> Strong improvement in image quality in DiT and ADM trained on various tasks. R-TR denotes random routing that utilizes random routing.
+      </figcaption>
+      <br> </br>
+
+      <h2 class="title is-4"> 2. Orthogonality with loss weighting methods</h2>
+      <p>
+        DTR also shows significant improvement in image quality when combined with loss weighting methods.
+      </p>
+      <br> </br>
+      <img id="taskaffinity" src="static/images/DTR_lossweighting_results.PNG">
+      <figcaption style="text-align: center;">
+        <strong>Figure:</strong> DTR shows significant improvement in image quality when combined with loss weighting methods.
+      </figcaption>
+      <br> </br>
+
+      <h2 class="title is-4"> 3. Significant effectiveness in longer training </h2>
+      <p>
+        Although DTR based on architecture used smaller parameters, DTR shows a similar performance compared to the larger model trained over longer iterations.
+      </p>
+      <br> </br>
+      <img id="taskaffinity" src="static/images/DTR_more_training.PNG">
+      <figcaption style="text-align: center;">
+        <strong>Figure:</strong> despite using fewer
+        parameters, Flops, and training iterations, our DTR with ANT-UW outperforms DiT-XL/2 trained
+        over 2.35 million iterations. Furthermore, our model performs competitively with DiT-XL, which
+        was trained on a larger set of 7 million iterations.
+      </figcaption>
+      <br> </br>
+
+
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">BibTeX</h2>
+    <pre><code>@article{park2023denoising,
+      title={Denoising Task Routing for Diffusion Models},
+      author={Park, Byeongjun and Woo, Sangmin and Go, Hyojun and Kim, Jin-Young and Kim, Changick},
+      journal={arXiv preprint arXiv:2310.07138},
+      year={2023}
+    }
+</code></pre>
+  </div>
+</section>
+
+<section class="section" id="Acknowledgement">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Acknowledgement</h2>
+    <p>
+      This website is adapted from <a
+      href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> and <a href="https://llava-vl.github.io/">LLaVA</a>, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+      Commons Attribution-ShareAlike 4.0 International License</a>.
+    </p>
+</section>
+
+</body>
+</html>
