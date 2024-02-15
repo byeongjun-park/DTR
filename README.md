@@ -1,8 +1,7 @@
 # Denoising Task Routing for Diffusion Models
 <!-- Arxiv Link, Project Link -->
 <a href="https://arxiv.org/abs/2310.07138"><img src="https://img.shields.io/badge/arXiv-2310.07138-b31b1b.svg"></a>
-
-<a href="https://gohyojun15.github.io/ANT_diffusion/"><img src="https://img.shields.io/badge/Project%20Page-online-brightgreen"></a>
+<a href="https://byeongjun-park.github.io/DTR/"><img src="https://img.shields.io/badge/Project%20Page-online-brightgreen"></a>
 
 This repository contains the official pytorch implementation of the paper: "Denoising Task Routing for Diffusion Models".
 In this repository, we release codes for the improved version of [DiT](https://openaccess.thecvf.com/content/ICCV2023/papers/Peebles_Scalable_Diffusion_Models_with_Transformers_ICCV_2023_paper.pdf) with the task routing. 
