@@ -42,6 +42,7 @@ Generated sample (*golden retriever*) from **256x256 DiT-L/2 + DTR (w/ cfg=2.0)*
 
 ## Todo
 - [x] Project Pages
+- [ ] Upload checkpoints
 
 [//]: # (- [ ] Linking Addressing Negative Transfer Project Pages.)
 [//]: # (- [ ] Generated Images.)
